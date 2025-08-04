@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 const AllNews = () => {
-    const [allNews, setAllNews]=useState(null)
+    const [allNews, setAllNews]=useState(null);
+    const [toggle, setToggle]=useState(false);
 
     useEffect(()=>{
         fetch('NewData.json')
@@ -9,11 +10,9 @@ const AllNews = () => {
         .then(data=> setAllNews(data))
     },[])
 
-    console.log(allNews)
-
   return (
-    <div className='cursor-pointer'>
-        {allNews&& allNews.map((item)=>{
+    <div className='cursor-pointer space-y-4'>
+        {allNews&& allNews.slice(0, toggle ? allNews.length: 20).map((item)=>{
             return(
                 <div key={item.id}>
                     <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
@@ -63,6 +62,8 @@ const AllNews = () => {
                 </div>
             )
         })}
+
+        <button onClick={()=>setToggle(!toggle)}>{toggle ? 'show less': 'show all'}</button>
     </div>
   )
 }
