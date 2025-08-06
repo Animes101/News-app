@@ -10,6 +10,8 @@ import Career from './pages/Career'
 import SingIn from './pages/SingIn'
 import SingUp from './pages/SingUp'
 import Details from './pages/Details'
+import AuthContext from './context/AuthContext'
+import PrivetRoute from './router/PrivetRoute'
 
 function App() {
 
@@ -23,7 +25,7 @@ function App() {
       {path:'/career', element:<Career />},
       {path:'/singin', element:<SingIn />},
       {path:'/singup', element:<SingUp />},
-      {path:'/news/:id', element:<Details />}
+      {path:'/news/:id', element:<PrivetRoute><Details /></PrivetRoute>}
       
     ],
   },
@@ -35,7 +37,9 @@ function App() {
  
   return (
     <>
-       <RouterProvider router={router} />
+       <AuthContext>
+          <RouterProvider router={router} />
+       </AuthContext>
     </>
   )
 }

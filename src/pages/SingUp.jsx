@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 
+import { useContext, useState } from "react";
+import { userCreateContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 const SingUp = () => {
-
   const [passwordError, setPasswordError]=useState('');
 
+  const {createUserEmailPassword,users}=useContext(userCreateContext);
+
   const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\s).+$/;
+
+const navigate=useNavigate();
 
 
   const hanldeSubmit=(e)=>{
@@ -20,9 +24,20 @@ const SingUp = () => {
       setPasswordError('Password must contain at least one uppercase letter, one lowercase letter, one number, and one space.');
       return;
     }
+      
+
+    createUserEmailPassword(email,password)
+    .then(user=>{
+      alert('create user successfully')
+      if(user){
+        navigate('/');
+      }
+      console.log(user);
+    })
+    .catch(err=> console.log(err.message))
 
 
-    console.log(username,email,password)
+
 
     e.target.username.value=''
     e.target.email.value=''
@@ -41,7 +56,6 @@ const SingUp = () => {
         <input className='border p-2' type="password" name="password" id="password" />
         <p>{passwordError&& <span className="text-red-500">{passwordError}</span>}</p>
         <button type="submit" className="px-8 py-3 font-semibold border rounded dark:border-gray-800 dark:text-gray-800">Sing Up</button>
-
       </form>
     </div>
   )
