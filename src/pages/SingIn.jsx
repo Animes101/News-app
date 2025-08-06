@@ -1,4 +1,6 @@
 import React from 'react'
+import { auth } from '../firebase/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const SingIn = () => {
 
@@ -7,7 +9,22 @@ const SingIn = () => {
     const email=e.target.email.value;
     const password=e.target.password.value;
 
-    console.log(email,password);
+ 
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+
+        console.log(userCredential)
+        // Signed in 
+        
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode,errorMessage)
+      })
 
 
     e.target.email.value='';

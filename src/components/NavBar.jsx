@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { userCreateContext } from '../context/AuthContext'
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
+import moment from 'moment';
 
 const NavBar = () => {
 
@@ -26,13 +27,13 @@ const NavBar = () => {
 
 
 
-  
+
   return (
     <div>
         <header>
             <h1 className='text-black text-6xl text-center font-oldEnglish font-bold'>The Dragon News</h1>
             <h3 className='text-center font-3xl font-bold'>Journalism Without Fear or Favour</h3>
-            <h3 className='text-center font-3xl font-bold'>Sunday, November 27, 2022</h3>
+            <h3 className='text-center font-3xl font-bold'>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h3>
             <div className='flex justify-center items-center'>
               <span className='text-white bg-red-400 p-4 rounded-sm'>Latest</span>
               <marquee className='text-red-500 font-bold font-oldEnglish' direction="left">Match Highlights: Germany vs Spain — as it happened   !   Match Highlights: Germany vs Spain as...</marquee>
