@@ -9,6 +9,7 @@ import About from './pages/About'
 import Career from './pages/Career'
 import SingIn from './pages/SingIn'
 import SingUp from './pages/SingUp'
+import Details from './pages/Details'
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
       {path:'/about', element:<About />},
       {path:'/career', element:<Career />},
       {path:'/singin', element:<SingIn />},
-      {path:'/singup', element:<SingUp />}
+      {path:'/singup', element:<SingUp />},
+      {path:'/news/:id', element:<Details />}
       
     ],
   },

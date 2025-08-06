@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const AllNews = () => {
     const [allNews, setAllNews]=useState(null);
@@ -11,11 +12,11 @@ const AllNews = () => {
     },[])
 
   return (
-    <div className='cursor-pointer space-y-4'>
+    <div  className='cursor-pointer space-y-4'>
         {allNews&& allNews.slice(0, toggle ? allNews.length: 20).map((item)=>{
             return(
                 <div key={item.id}>
-                    <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
+                    <div className="flex flex-col  p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
                         <div className="flex space-x-4">
                             <img alt="" src={item.author.img} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
                             <div className="flex flex-col space-y-1">
@@ -24,7 +25,9 @@ const AllNews = () => {
                             </div>
                         </div>
                         <div>
-                            <img src={item.image_url} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
+                            <Link to={`/news/${item.id}`}>
+                                <img  src={item.image_url} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
+                            </Link>
                             <h2 className="mb-1 text-xl font-semibold">{item.title}</h2>
                             <p className="text-sm dark:text-gray-600">{item.details}</p>
                         </div>
