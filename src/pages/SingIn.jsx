@@ -1,8 +1,14 @@
 import React from 'react'
 import { auth } from '../firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SingIn = () => {
+
+  const location = useLocation();
+
+
+  const navigate=useNavigate();
 
   const hanldeSubmit=(e)=>{
     e.preventDefault();
@@ -15,8 +21,10 @@ const SingIn = () => {
       .then((userCredential) => {
 
         console.log(userCredential)
-        // Signed in 
-        
+
+       navigate(location?.state || '/');
+        // Signed in
+
         // ...
       })
       .catch((error) => {

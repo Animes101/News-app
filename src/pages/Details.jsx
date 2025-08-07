@@ -6,7 +6,7 @@ import '@smastrom/react-rating/style.css'
 const Details = () => {
 
     const [singleNews, setSingleNews]=useState('null');
-    const {author,details,image_url,others,rating,tags,thumbnail_url,title,total_view}=singleNews;
+    const {author,details,image_url,rating,tags,title,total_view}=singleNews;
 
 
     const {id}=useParams();
@@ -17,8 +17,6 @@ const Details = () => {
         .then((res)=> res.json())
         .then(data=> setSingleNews(data.find(item=> item.id === id)));
     },[id])
-
-    console.log(singleNews)
   return (
     <div className='my-20'>
         <div className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">

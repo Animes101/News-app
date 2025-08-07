@@ -8,12 +8,14 @@ import {createUserWithEmailAndPassword } from "firebase/auth";
 
 const AuthContext = ({children}) => {
     const [users, setUsers]=useState(null);
+    const [loading, setLoading]=useState(true);
 
 
 
 
     //user create email or password
    const createUserEmailPassword=(email,password)=>{
+    setLoading(true)
 
       return createUserWithEmailAndPassword(auth,email,password)
 
@@ -22,6 +24,7 @@ const AuthContext = ({children}) => {
 
     //Login user with google
     const loginGoogle=(provider)=>{
+      setLoading(true)
 
       return signInWithPopup(auth, provider)
     }
@@ -29,8 +32,8 @@ const AuthContext = ({children}) => {
     useEffect(()=>{
 
       const unscribe=onAuthStateChanged(auth,currentUser=>{
-
         setUsers(currentUser);
+        setLoading(false);
       })
 
 
@@ -39,7 +42,7 @@ const AuthContext = ({children}) => {
         
     },[])
   return (
-      <userCreateContext.Provider value={{users, setUsers,createUserEmailPassword,loginGoogle}}>
+      <userCreateContext.Provider value={{users, setUsers,createUserEmailPassword,loginGoogle,loading}}>
         {children}
     </userCreateContext.Provider>
   )

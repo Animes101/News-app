@@ -9,8 +9,6 @@ const NavBar = () => {
 
   const {users}=useContext(userCreateContext);
 
-  console.log(users)
-
   const handleLogout=()=>{
     signOut(auth)
     .then(() => {
